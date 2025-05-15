@@ -1,0 +1,194 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.text-link {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.text-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.language-switcher {
+    display: flex;
+    gap: 10px;
+}
+
+.language-switcher span {
+    cursor: pointer;
+    padding: 5px;
+}
+
+.language-switcher span:hover {
+    text-decoration: underline;
+}
+
+.message {
+    background-color: #e74c3c;
+    color: white;
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 5px;
+    text-align: center;
+    display: none;
+}
+
+.message h2 {
+    margin-top: 0;
+}
+
+.instructions {
+    padding: 1rem;
+    margin: 1rem;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+
+.metrics-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: white;
+    border-radius: 5px;
+    padding: 1rem;
+    flex: 1;
+    min-width: 250px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+    margin-top: 0;
+    color: #2c3e50;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.5rem;
+}
+
+.metric-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #3498db;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.metric-details {
+    font-size: 0.9rem;
+}
+
+footer {
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Email page styles */
+.email-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.email-card {
+    background-color: white;
+    border-radius: 5px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.email-list {
+    margin: 1rem 0;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.email-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.email-item:last-child {
+    border-bottom: none;
+}
+
+.delete-btn {
+    color: #e74c3c;
+    cursor: pointer;
+}
+
+.email-input {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.email-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.email-buttons button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button.save {
+    background-color: #2ecc71;
+    color: white;
+}
+
+button.add {
+    background-color: #3498db;
+    color: white;
+}
+
+button.cancel {
+    background-color: #e74c3c;
+    color: white;
+}

@@ -1,0 +1,80 @@
+ERROR:asyncio:Task exception was never retrieved
+future: <Task finished name='Task-908' coro=<TsharkXmlParser.get_packets_from_stream() done, defined at /home/sumadhva-ixsk/Network-Traffic-Anomaly-Detection/venv310/lib/python3.10/site-packages/pyshark/tshark/output_parser/tshark_xml.py:24> exception=EOFError()>
+Traceback (most recent call last):
+  File "/home/sumadhva-ixsk/Network-Traffic-Anomaly-Detection/Capture_Detection.py", line 132, in capture
+    for packet in cap:
+  File "/home/sumadhva-ixsk/Network-Traffic-Anomaly-Detection/venv310/lib/python3.10/site-packages/pyshark/capture/capture.py", line 221, in _packets_from_tshark_sync
+    packet, data = self.eventloop.run_until_complete(
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 636, in run_until_complete
+    self.run_forever()
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 603, in run_forever
+    self._run_once()
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 1871, in _run_once
+    event_list = self._selector.select(timeout)
+  File "/usr/lib/python3.10/selectors.py", line 469, in select
+    fd_event_list = self._selector.poll(timeout, max_ev)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sumadhva-ixsk/Network-Traffic-Anomaly-Detection/venv310/lib/python3.10/site-packages/pyshark/tshark/output_parser/tshark_xml.py", line 27, in get_packets_from_stream
+    return await super().get_packets_from_stream(stream, existing_data, got_first_packet=got_first_packet)
+  File "/home/sumadhva-ixsk/Network-Traffic-Anomaly-Detection/venv310/lib/python3.10/site-packages/pyshark/tshark/output_parser/base_parser.py", line 22, in get_packets_from_stream
+    raise EOFError()
+EOFError
+ERROR:asyncio:Task exception was never retrieved
+future: <Task finished name='Task-803' coro=<TsharkXmlParser.get_packets_from_stream() done, defined at /home/sumadhva-ixsk/Network-Traffic-Anomaly-Detection/venv310/lib/python3.10/site-packages/pyshark/tshark/output_parser/tshark_xml.py:24> exception=EOFError()>
+Traceback (most recent call last):
+  File "/home/sumadhva-ixsk/Network-Traffic-Anomaly-Detection/Capture_Detection.py", line 132, in capture
+    for packet in cap:
+  File "/home/sumadhva-ixsk/Network-Traffic-Anomaly-Detection/venv310/lib/python3.10/site-packages/pyshark/capture/capture.py", line 221, in _packets_from_tshark_sync
+    packet, data = self.eventloop.run_until_complete(
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 636, in run_until_complete
+    self.run_forever()
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 603, in run_forever
+    self._run_once()
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 1871, in _run_once
+    event_list = self._selector.select(timeout)
+  File "/usr/lib/python3.10/selectors.py", line 469, in select
+    fd_event_list = self._selector.poll(timeout, max_ev)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sumadhva-ixsk/Network-Traffic-Anomaly-Detection/venv310/lib/python3.10/site-packages/pyshark/tshark/output_parser/tshark_xml.py", line 27, in get_packets_from_stream
+    return await super().get_packets_from_stream(stream, existing_data, got_first_packet=got_first_packet)
+  File "/home/sumadhva-ixsk/Network-Traffic-Anomaly-Detection/venv310/lib/python3.10/site-packages/pyshark/tshark/output_parser/base_parser.py", line 22, in get_packets_from_stream
+    raise EOFError()
+EOFError
+INFO:werkzeug:127.0.0.1 - - [25/Apr/2025 22:44:24] "[33mGET / HTTP/1.1[0m" 404 -
+ERROR:asyncio:Task exception was never retrieved
+future: <Task finished name='Task-963' coro=<TsharkXmlParser.get_packets_from_stream() done, defined at /home/sumadhva-ixsk/Network-Traffic-Anomaly-Detection/venv/lib/python3.12/site-packages/pyshark/tshark/output_parser/tshark_xml.py:24> exception=EOFError()>
+Traceback (most recent call last):
+  File "/home/sumadhva-ixsk/Network-Traffic-Anomaly-Detection/Capture_Detection.py", line 132, in capture
+    for packet in cap:
+  File "/home/sumadhva-ixsk/Network-Traffic-Anomaly-Detection/venv/lib/python3.12/site-packages/pyshark/capture/capture.py", line 221, in _packets_from_tshark_sync
+    packet, data = self.eventloop.run_until_complete(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 674, in run_until_complete
+    self.run_forever()
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 641, in run_forever
+    self._run_once()
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 1949, in _run_once
+    event_list = self._selector.select(timeout)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/selectors.py", line 468, in select
+    fd_event_list = self._selector.poll(timeout, max_ev)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sumadhva-ixsk/Network-Traffic-Anomaly-Detection/venv/lib/python3.12/site-packages/pyshark/tshark/output_parser/tshark_xml.py", line 27, in get_packets_from_stream
+    return await super().get_packets_from_stream(stream, existing_data, got_first_packet=got_first_packet)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sumadhva-ixsk/Network-Traffic-Anomaly-Detection/venv/lib/python3.12/site-packages/pyshark/tshark/output_parser/base_parser.py", line 22, in get_packets_from_stream
+    raise EOFError()
+EOFError
