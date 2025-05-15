@@ -78,3 +78,206 @@ Traceback (most recent call last):
   File "/home/sumadhva-ixsk/Network-Traffic-Anomaly-Detection/venv/lib/python3.12/site-packages/pyshark/tshark/output_parser/base_parser.py", line 22, in get_packets_from_stream
     raise EOFError()
 EOFError
+ERROR:asyncio:Task exception was never retrieved
+future: <Task finished name='Task-1355' coro=<TsharkXmlParser.get_packets_from_stream() done, defined at /home/varun/varun/CN/Network_traffic_anomaly_detection/venv/lib/python3.12/site-packages/pyshark/tshark/output_parser/tshark_xml.py:24> exception=EOFError()>
+Traceback (most recent call last):
+  File "/home/varun/varun/CN/Network_traffic_anomaly_detection/Capture_Detection.py", line 132, in capture
+    for packet in cap:
+  File "/home/varun/varun/CN/Network_traffic_anomaly_detection/venv/lib/python3.12/site-packages/pyshark/capture/capture.py", line 221, in _packets_from_tshark_sync
+    packet, data = self.eventloop.run_until_complete(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 674, in run_until_complete
+    self.run_forever()
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 641, in run_forever
+    self._run_once()
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 1949, in _run_once
+    event_list = self._selector.select(timeout)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/selectors.py", line 468, in select
+    fd_event_list = self._selector.poll(timeout, max_ev)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/varun/varun/CN/Network_traffic_anomaly_detection/venv/lib/python3.12/site-packages/pyshark/tshark/output_parser/tshark_xml.py", line 27, in get_packets_from_stream
+    return await super().get_packets_from_stream(stream, existing_data, got_first_packet=got_first_packet)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/varun/varun/CN/Network_traffic_anomaly_detection/venv/lib/python3.12/site-packages/pyshark/tshark/output_parser/base_parser.py", line 22, in get_packets_from_stream
+    raise EOFError()
+EOFError
+ERROR:asyncio:Task exception was never retrieved
+future: <Task finished name='Task-128' coro=<TsharkXmlParser.get_packets_from_stream() done, defined at /home/varun/varun/CN/Network_traffic_anomaly_detection/venv/lib/python3.12/site-packages/pyshark/tshark/output_parser/tshark_xml.py:24> exception=EOFError()>
+Traceback (most recent call last):
+  File "/home/varun/varun/CN/Network_traffic_anomaly_detection/Capture_Detection.py", line 132, in capture
+    for packet in cap:
+  File "/home/varun/varun/CN/Network_traffic_anomaly_detection/venv/lib/python3.12/site-packages/pyshark/capture/capture.py", line 221, in _packets_from_tshark_sync
+    packet, data = self.eventloop.run_until_complete(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 674, in run_until_complete
+    self.run_forever()
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 641, in run_forever
+    self._run_once()
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 1949, in _run_once
+    event_list = self._selector.select(timeout)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/selectors.py", line 468, in select
+    fd_event_list = self._selector.poll(timeout, max_ev)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/varun/varun/CN/Network_traffic_anomaly_detection/venv/lib/python3.12/site-packages/pyshark/tshark/output_parser/tshark_xml.py", line 27, in get_packets_from_stream
+    return await super().get_packets_from_stream(stream, existing_data, got_first_packet=got_first_packet)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/varun/varun/CN/Network_traffic_anomaly_detection/venv/lib/python3.12/site-packages/pyshark/tshark/output_parser/base_parser.py", line 22, in get_packets_from_stream
+    raise EOFError()
+EOFError
+ERROR:asyncio:Task exception was never retrieved
+future: <Task finished name='Task-698' coro=<TsharkXmlParser.get_packets_from_stream() done, defined at /home/varun/varun/CN/Network_traffic_anomaly_detection/venv/lib/python3.12/site-packages/pyshark/tshark/output_parser/tshark_xml.py:24> exception=EOFError()>
+Traceback (most recent call last):
+  File "/home/varun/varun/CN/Network_traffic_anomaly_detection/Capture_Detection.py", line 132, in capture
+    for packet in cap:
+  File "/home/varun/varun/CN/Network_traffic_anomaly_detection/venv/lib/python3.12/site-packages/pyshark/capture/capture.py", line 221, in _packets_from_tshark_sync
+    packet, data = self.eventloop.run_until_complete(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 674, in run_until_complete
+    self.run_forever()
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 641, in run_forever
+    self._run_once()
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 1949, in _run_once
+    event_list = self._selector.select(timeout)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/selectors.py", line 468, in select
+    fd_event_list = self._selector.poll(timeout, max_ev)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/varun/varun/CN/Network_traffic_anomaly_detection/venv/lib/python3.12/site-packages/pyshark/tshark/output_parser/tshark_xml.py", line 27, in get_packets_from_stream
+    return await super().get_packets_from_stream(stream, existing_data, got_first_packet=got_first_packet)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/varun/varun/CN/Network_traffic_anomaly_detection/venv/lib/python3.12/site-packages/pyshark/tshark/output_parser/base_parser.py", line 22, in get_packets_from_stream
+    raise EOFError()
+EOFError
+ERROR:asyncio:Task exception was never retrieved
+future: <Task finished name='Task-855' coro=<TsharkXmlParser.get_packets_from_stream() done, defined at /home/varun/varun/CN/Network_traffic_anomaly_detection/venv/lib/python3.12/site-packages/pyshark/tshark/output_parser/tshark_xml.py:24> exception=EOFError()>
+Traceback (most recent call last):
+  File "/home/varun/varun/CN/Network_traffic_anomaly_detection/Capture_Detection.py", line 136, in capture
+    for packet in cap:
+  File "/home/varun/varun/CN/Network_traffic_anomaly_detection/venv/lib/python3.12/site-packages/pyshark/capture/capture.py", line 221, in _packets_from_tshark_sync
+    packet, data = self.eventloop.run_until_complete(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 674, in run_until_complete
+    self.run_forever()
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 641, in run_forever
+    self._run_once()
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 1949, in _run_once
+    event_list = self._selector.select(timeout)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/selectors.py", line 468, in select
+    fd_event_list = self._selector.poll(timeout, max_ev)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/varun/varun/CN/Network_traffic_anomaly_detection/venv/lib/python3.12/site-packages/pyshark/tshark/output_parser/tshark_xml.py", line 27, in get_packets_from_stream
+    return await super().get_packets_from_stream(stream, existing_data, got_first_packet=got_first_packet)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/varun/varun/CN/Network_traffic_anomaly_detection/venv/lib/python3.12/site-packages/pyshark/tshark/output_parser/base_parser.py", line 22, in get_packets_from_stream
+    raise EOFError()
+EOFError
+ERROR:asyncio:Task exception was never retrieved
+future: <Task finished name='Task-27522' coro=<TsharkXmlParser.get_packets_from_stream() done, defined at /home/varun/varun/CN/Network_traffic_anomaly_detection/venv/lib/python3.12/site-packages/pyshark/tshark/output_parser/tshark_xml.py:24> exception=EOFError()>
+Traceback (most recent call last):
+  File "/home/varun/varun/CN/Network_traffic_anomaly_detection/Capture_Detection.py", line 136, in capture
+    break
+  File "/home/varun/varun/CN/Network_traffic_anomaly_detection/venv/lib/python3.12/site-packages/pyshark/capture/capture.py", line 221, in _packets_from_tshark_sync
+    packet, data = self.eventloop.run_until_complete(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 674, in run_until_complete
+    self.run_forever()
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 641, in run_forever
+    self._run_once()
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 1949, in _run_once
+    event_list = self._selector.select(timeout)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/selectors.py", line 468, in select
+    fd_event_list = self._selector.poll(timeout, max_ev)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/varun/varun/CN/Network_traffic_anomaly_detection/venv/lib/python3.12/site-packages/pyshark/tshark/output_parser/tshark_xml.py", line 27, in get_packets_from_stream
+    return await super().get_packets_from_stream(stream, existing_data, got_first_packet=got_first_packet)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/varun/varun/CN/Network_traffic_anomaly_detection/venv/lib/python3.12/site-packages/pyshark/tshark/output_parser/base_parser.py", line 22, in get_packets_from_stream
+    raise EOFError()
+EOFError
+ERROR:asyncio:Task exception was never retrieved
+future: <Task finished name='Task-2156' coro=<TsharkXmlParser.get_packets_from_stream() done, defined at /home/varun/varun/CN/Network_traffic_anomaly_detection/venv/lib/python3.12/site-packages/pyshark/tshark/output_parser/tshark_xml.py:24> exception=EOFError()>
+Traceback (most recent call last):
+  File "/home/varun/varun/CN/Network_traffic_anomaly_detection/Capture_Detection.py", line 141, in capture
+    for packet in cap:
+  File "/home/varun/varun/CN/Network_traffic_anomaly_detection/venv/lib/python3.12/site-packages/pyshark/capture/capture.py", line 221, in _packets_from_tshark_sync
+    packet, data = self.eventloop.run_until_complete(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 674, in run_until_complete
+    self.run_forever()
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 641, in run_forever
+    self._run_once()
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 1949, in _run_once
+    event_list = self._selector.select(timeout)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/selectors.py", line 468, in select
+    fd_event_list = self._selector.poll(timeout, max_ev)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/varun/varun/CN/Network_traffic_anomaly_detection/venv/lib/python3.12/site-packages/pyshark/tshark/output_parser/tshark_xml.py", line 27, in get_packets_from_stream
+    return await super().get_packets_from_stream(stream, existing_data, got_first_packet=got_first_packet)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/varun/varun/CN/Network_traffic_anomaly_detection/venv/lib/python3.12/site-packages/pyshark/tshark/output_parser/base_parser.py", line 22, in get_packets_from_stream
+    raise EOFError()
+EOFError
+ERROR:asyncio:Task exception was never retrieved
+future: <Task finished name='Task-3526' coro=<TsharkXmlParser.get_packets_from_stream() done, defined at /home/varun/varun/CN/Network_traffic_anomaly_detection/venv/lib/python3.12/site-packages/pyshark/tshark/output_parser/tshark_xml.py:24> exception=EOFError()>
+Traceback (most recent call last):
+  File "/home/varun/varun/CN/Network_traffic_anomaly_detection/Capture_Detection.py", line 141, in capture
+    for packet in cap:
+  File "/home/varun/varun/CN/Network_traffic_anomaly_detection/venv/lib/python3.12/site-packages/pyshark/capture/capture.py", line 221, in _packets_from_tshark_sync
+    packet, data = self.eventloop.run_until_complete(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 674, in run_until_complete
+    self.run_forever()
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 641, in run_forever
+    self._run_once()
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 1949, in _run_once
+    event_list = self._selector.select(timeout)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/selectors.py", line 468, in select
+    fd_event_list = self._selector.poll(timeout, max_ev)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/varun/varun/CN/Network_traffic_anomaly_detection/venv/lib/python3.12/site-packages/pyshark/tshark/output_parser/tshark_xml.py", line 27, in get_packets_from_stream
+    return await super().get_packets_from_stream(stream, existing_data, got_first_packet=got_first_packet)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/varun/varun/CN/Network_traffic_anomaly_detection/venv/lib/python3.12/site-packages/pyshark/tshark/output_parser/base_parser.py", line 22, in get_packets_from_stream
+    raise EOFError()
+EOFError

@@ -24,6 +24,7 @@ from joblib import load
 from sklearn.preprocessing import LabelEncoder
 from datetime import datetime
 import re
+from Packet_anomaly import generate_anomalous_packets
 
 # Load trained model
 model = load('AnomalyDetectionModel.joblib')
@@ -117,16 +118,24 @@ def extract_and_save_json(text, output_filename):
         json.dump({k: data[k] for k in ["en", "ku", "ar"]}, f, ensure_ascii=False, indent=4)
 
 # Main capture function
-def capture(interface="wlp1s0", duration=3000):
+anomalies_count = 0
+anomalies_by_type = {1: 0, 2: 0, 3: 0}
+anomaly_ips_by_type = {1: set(), 2: set(), 3: set()}
+anomalies_last_seen = {}
+
+last_saved_counter = -1  # To debounce save_json
+
+def capture(interface="wlp0s20f3", duration=3000):
     print("Running...")
     cap = pyshark.LiveCapture(interface=interface)
     start_time = time.time()
     sessions = {}
     counter = 0
 
-    global anomalies_count, anomalies_by_type, anomaly_ips_by_type, anomalies_last_seen
-
     logging.basicConfig(level=logging.ERROR, filename='packet_errors.log')
+
+    anomalous_packets = generate_anomalous_packets()
+    anomaly_injection_interval = 200  # Less frequent
 
     try:
         for packet in cap:
@@ -137,83 +146,14 @@ def capture(interface="wlp1s0", duration=3000):
 
             counter += 1
 
-            try:
-                src_ip = dst_ip = flags = tcp_flags = ''
-                ttl = src_port = dst_port = 0
-                checksum = ''
-                protocol = 0
-                total_length = payload_size = unsuccessful_conn = 0
+            # Inject anomalies less frequently for realism
+            if counter % anomaly_injection_interval == 0:
+                print("[DEBUG] Injecting Anomalous Packets...")
+                for anomalous_packet in anomalous_packets:
+                    process_packet(anomalous_packet, sessions, counter, current_time)
 
-                if hasattr(packet, 'ip'):
-                    ip_layer = packet.ip
-                    src_ip = getattr(ip_layer, 'src', '0.0.0.0')
-                    dst_ip = getattr(ip_layer, 'dst', '0.0.0.0')
-                    total_length = safe_int(getattr(ip_layer, 'len', 0))
-                    flags = getattr(ip_layer, 'flags', '')
-                    ttl = safe_int(getattr(ip_layer, 'ttl', 0))
-                    checksum = getattr(ip_layer, 'checksum', '')
-
-                proto_str = str(getattr(packet, 'transport_layer', 'Unknown'))
-                if proto_str == "TCP":
-                    protocol = 1
-                    tcp_flags = str(getattr(packet.tcp, 'flags', ''))
-                    tcp_header_len = safe_int(getattr(packet.tcp, 'hdr_len', 0))
-                    src_port = safe_int(getattr(packet.tcp, 'srcport', 0))
-                    dst_port = safe_int(getattr(packet.tcp, 'dstport', 0))
-                    payload_size = total_length - tcp_header_len
-                    unsuccessful_conn = update_unsuccessful_connections(src_ip, tcp_flags)
-                elif proto_str == "UDP":
-                    protocol = 2
-                    src_port = safe_int(getattr(packet.udp, 'srcport', 0))
-                    dst_port = safe_int(getattr(packet.udp, 'dstport', 0))
-                    if hasattr(packet.udp, 'payload'):
-                        payload_size = len(packet.udp.payload.binary_value)
-
-                session_key = (src_ip, dst_ip, src_port, dst_port, protocol)
-                if session_key not in sessions:
-                    sessions[session_key] = {'start_time': current_time, 'packet_count': 0, 'byte_count': 0}
-                sessions[session_key]['packet_count'] += 1
-                sessions[session_key]['byte_count'] += total_length
-
-                session_id = int(hashlib.sha256(f"{src_ip}-{dst_ip}-{src_port}-{dst_port}-{protocol}".encode()).hexdigest(), 16) % (10**8)
-
-                features = {
-                    "Session ID": session_id,
-                    "Source IP": src_ip,
-                    "Destination IP": dst_ip,
-                    "Source Port": src_port,
-                    "Destination Port": dst_port,
-                    "Protocol": protocol,
-                    "Total Length": total_length,
-                    "TTL": ttl,
-                    "Checksum": checksum,
-                    "Flags": flags,
-                    "TCP Flags": tcp_flags,
-                    "Payload Size": payload_size,
-                    "Packet Rate": update_packet_rate(src_ip, current_time),
-                    "SYN-ACK Ratio": update_syn_ack_ratio(src_ip, tcp_flags),
-                    "Port Diversity": update_port_diversity_func(src_ip, dst_port),
-                    "Retransmissions": 0,
-                    "Unsuccessful Connections": unsuccessful_conn,
-                    "Number of Packets": sessions[session_key]['packet_count'],
-                    "Byte Count": sessions[session_key]['byte_count'],
-                }
-
-                update_protocol_distribution_func(protocol)
-
-                anomaly = checkAnomaly(features)
-                if anomaly > 0:
-                    anomalies_count += 1
-                    anomalies_by_type[anomaly] += 1
-                    anomaly_ips_by_type[anomaly].add(src_ip)
-                    anomalies_last_seen[anomaly] = current_time
-
-                print(f"Anomaly: {anomaly} | Source IP: {src_ip} | Checksum: {checksum}")
-                save_json(counter)
-
-            except Exception as e:
-                logging.error(f"Error processing packet: {e}")
-                continue
+            # Process the captured packet
+            process_packet(packet, sessions, counter, current_time)
 
     except (EOFError, KeyboardInterrupt):
         print("Capture stopped.")
@@ -221,6 +161,121 @@ def capture(interface="wlp1s0", duration=3000):
         cap.close()
         save_json(counter)
         print("Capture closed.")
+
+def process_packet(packet, sessions, counter, current_time):
+    global anomalies_count, anomalies_by_type, anomaly_ips_by_type, anomalies_last_seen, last_saved_counter
+
+    try:
+        src_ip = dst_ip = flags = tcp_flags = ''
+        ttl = src_port = dst_port = 0
+        checksum = ''
+        protocol = 0
+        total_length = payload_size = unsuccessful_conn = 0
+
+        # Handle simulated vs live packet
+        if isinstance(packet, dict):
+            ip_layer = packet.get('ip', {})
+            src_ip = ip_layer.get('src', '0.0.0.0')
+            dst_ip = ip_layer.get('dst', '0.0.0.0')
+            total_length = safe_int(ip_layer.get('len', 0))
+            flags = ip_layer.get('flags', '')
+            ttl = safe_int(ip_layer.get('ttl', 0))
+            checksum = ip_layer.get('checksum', '')
+            proto_str = packet.get('transport_layer', 'Unknown')
+            tcp_layer = packet.get('tcp')
+            udp_layer = packet.get('udp')
+            payload_size = packet.get('payload_size', 0)
+
+            if proto_str == "TCP" and tcp_layer:
+                protocol = 1
+                tcp_flags = tcp_layer.get('flags', '')
+                tcp_header_len = safe_int(tcp_layer.get('hdr_len', 0))
+                src_port = safe_int(tcp_layer.get('srcport', 0))
+                dst_port = safe_int(tcp_layer.get('dstport', 0))
+                unsuccessful_conn = update_unsuccessful_connections(src_ip, tcp_flags)
+            elif proto_str == "UDP" and udp_layer:
+                protocol = 2
+                src_port = safe_int(udp_layer.get('srcport', 0))
+                dst_port = safe_int(udp_layer.get('dstport', 0))
+                if 'payload' in udp_layer and isinstance(udp_layer['payload'], bytes):
+                    payload_size = len(udp_layer['payload'])
+            else:
+                protocol = packet.get('protocol_number', 0)
+
+        else:
+            if hasattr(packet, 'ip'):
+                ip_layer = packet.ip
+                src_ip = getattr(ip_layer, 'src', '0.0.0.0')
+                dst_ip = getattr(ip_layer, 'dst', '0.0.0.0')
+                total_length = safe_int(getattr(ip_layer, 'len', 0))
+                flags = getattr(ip_layer, 'flags', '')
+                ttl = safe_int(getattr(ip_layer, 'ttl', 0))
+                checksum = getattr(ip_layer, 'checksum', '')
+
+            proto_str = str(getattr(packet, 'transport_layer', 'Unknown'))
+            if proto_str == "TCP":
+                protocol = 1
+                tcp_flags = str(getattr(packet.tcp, 'flags', ''))
+                tcp_header_len = safe_int(getattr(packet.tcp, 'hdr_len', 0))
+                src_port = safe_int(getattr(packet.tcp, 'srcport', 0))
+                dst_port = safe_int(getattr(packet.tcp, 'dstport', 0))
+                payload_size = total_length - tcp_header_len
+                unsuccessful_conn = update_unsuccessful_connections(src_ip, tcp_flags)
+            elif proto_str == "UDP":
+                protocol = 2
+                src_port = safe_int(getattr(packet.udp, 'srcport', 0))
+                dst_port = safe_int(getattr(packet.udp, 'dstport', 0))
+                if hasattr(packet.udp, 'payload'):
+                    payload_size = len(packet.udp.payload.binary_value)
+
+        session_key = (src_ip, dst_ip, src_port, dst_port, protocol)
+        if session_key not in sessions:
+            sessions[session_key] = {'start_time': current_time, 'packet_count': 0, 'byte_count': 0}
+        sessions[session_key]['packet_count'] += 1
+        sessions[session_key]['byte_count'] += total_length
+
+        session_id = int(hashlib.sha256(f"{src_ip}-{dst_ip}-{src_port}-{dst_port}-{protocol}".encode()).hexdigest(), 16) % (10**8)
+
+        features = {
+            "Session ID": session_id,
+            "Source IP": src_ip,
+            "Destination IP": dst_ip,
+            "Source Port": src_port,
+            "Destination Port": dst_port,
+            "Protocol": protocol,
+            "Total Length": total_length,
+            "TTL": ttl,
+            "Checksum": checksum,
+            "Flags": flags,
+            "TCP Flags": tcp_flags,
+            "Payload Size": payload_size,
+            "Packet Rate": update_packet_rate(src_ip, current_time),
+            "SYN-ACK Ratio": update_syn_ack_ratio(src_ip, tcp_flags),
+            "Port Diversity": update_port_diversity_func(src_ip, dst_port),
+            "Retransmissions": 0,
+            "Unsuccessful Connections": unsuccessful_conn,
+            "Number of Packets": sessions[session_key]['packet_count'],
+            "Byte Count": sessions[session_key]['byte_count'],
+        }
+
+        update_protocol_distribution_func(protocol)
+
+        anomaly = checkAnomaly(features)
+        if anomaly > 0:
+            anomalies_count += 1
+            anomalies_by_type[anomaly] += 1
+            anomaly_ips_by_type[anomaly].add(src_ip)
+            anomalies_last_seen[anomaly] = current_time
+            
+        print(f"[ANOMALY] Type: {anomaly} | Source IP: {src_ip} | Checksum: {checksum}")
+
+            # Avoid saving every single time
+        if counter != last_saved_counter:
+            save_json(counter)
+            last_saved_counter = counter
+
+    except Exception as e:
+        logging.error(f"Error processing packet: {e}")
 
 # Run capture
 capture()

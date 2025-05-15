@@ -1,4 +1,4 @@
-#!/home/sumadhva-ixsk/Network-Traffic-Anomaly-Detection/venv/bin/python3
+#!/home/varun/varun/CN/Network_traffic_anomaly_detection/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
